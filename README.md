@@ -1,2 +1,2 @@
 # cse340-course-repo
-# created by Jacob Buhler
+# Created by Jacob Buhler
