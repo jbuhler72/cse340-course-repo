@@ -1,30 +1,234 @@
-html, body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+/* ==========================================================================
+   CSE 340 Service Network — main stylesheet
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    /* Color palette */
+    --color-primary: #2563eb;
+    --color-primary-dark: #1d4ed8;
+    --color-primary-light: #eff6ff;
+    --color-text: #1f2937;
+    --color-text-muted: #6b7280;
+    --color-bg: #f7f8fa;
+    --color-surface: #ffffff;
+    --color-border: #e5e7eb;
+
+    /* Typography */
+    --font-heading: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    --font-body: 'Inter', 'Segoe UI', Arial, sans-serif;
+
+    /* Layout */
+    --max-width: 960px;
+    --radius: 10px;
+    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+    --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.08);
+    --transition: 0.18s ease;
 }
 
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+}
+
+/* ---------- Base ---------- */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    line-height: 1.25;
+    margin: 0 0 0.5em;
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--color-text);
+}
+
+h2 {
+    font-size: 1.25rem;
+    color: var(--color-primary-dark);
+    font-weight: 600;
+}
+
+p {
+    color: var(--color-text-muted);
+    margin: 0 0 1em;
+}
+
+/* ---------- Navigation ---------- */
 body {
     nav {
+        background-color: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: var(--shadow-sm);
+        padding: 0.9rem 1.5rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+
         ul {
             list-style-type: none;
+            margin: 0;
             padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            max-width: var(--max-width);
+            margin-inline: auto;
         }
 
         li {
             display: inline;
-            margin-right: 15px;
         }
 
         a {
             text-decoration: none;
-            color: #333;
-            font-weight: bold;
+            color: var(--color-text-muted);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: 999px;
+            transition: color var(--transition), background-color var(--transition);
 
             &:hover {
-                color: #0066cc;
+                color: var(--color-primary-dark);
+                background-color: var(--color-primary-light);
+            }
+
+            &:focus-visible {
+                outline: 2px solid var(--color-primary);
+                outline-offset: 2px;
             }
         }
     }
-}        
+}
+
+/* ---------- Main content ---------- */
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+}
+
+main h1 {
+    text-align: center;
+    margin-bottom: 0.25em;
+}
+
+main > h2 {
+    text-align: center;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+main > p {
+    max-width: 640px;
+    margin-inline: auto;
+    text-align: center;
+}
+
+/* Home page hero image */
+.main-logo {
+    display: block;
+    margin: 2rem auto 0;
+    max-width: 420px;
+    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+}
+
+/* ---------- Card list (organizations / projects) ---------- */
+main ul {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+}
+
+main ul li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1rem 1.25rem;
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+main ul li:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+main ul li img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+main ul li strong {
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    margin-right: 0.35em;
+}
+
+/* ---------- Footer ---------- */
+footer {
+    border-top: 1px solid var(--color-border);
+    padding: 1.5rem;
+    text-align: center;
+
+    p {
+        color: var(--color-text-muted);
+        font-size: 0.85rem;
+        margin: 0;
+    }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+    body nav ul {
+        justify-content: center;
+    }
+
+    main {
+        padding: 1.75rem 1rem 3rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+}
