@@ -254,6 +254,54 @@ main article p:last-of-type {
     border-top: 1px solid var(--color-border);
 }
 
+/* ---------- Category cards ---------- */
+main .categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin: 2rem 0 0;
+}
+
+.category-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1.75rem 1.25rem;
+    text-align: center;
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.category-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.category-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.category-card h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+}
+
+.category-card p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
 /* ---------- Footer ---------- */
 footer {
     border-top: 1px solid var(--color-border);
@@ -279,5 +327,9 @@ footer {
 
     h1 {
         font-size: 1.6rem;
+    }
+
+    main .categories {
+        grid-template-columns: 1fr;
     }
 }
