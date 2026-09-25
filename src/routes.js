@@ -2,19 +2,26 @@ import express from 'express';
 
 import { showHomePage } from './controllers/index.js';
 import { showOrganizationsPage } from './controllers/organizations.js';
-import { showProjectsPage } from './controllers/projects.js';
-import { showCategoriesPage } from './controllers/categories.js';
-import { testErrorPage } from './controllers/errors.js';
 import { showOrganizationDetailsPage } from './controllers/organizations.js';
+import { showProjectsPage } from './controllers/projects.js';
+import { showProjectDetailsPage } from './controllers/projects.js';
+import { showCategoriesPage } from './controllers/categories.js';
+import { showCategoryDetailsPage } from './controllers/categories.js';
+import { testErrorPage } from './controllers/errors.js';
 
 const router = express.Router();
 
 router.get('/', showHomePage);
+// Route for organization  pages
 router.get('/organizations', showOrganizationsPage);
-router.get('/projects', showProjectsPage);
-router.get('/categories', showCategoriesPage);
-// Route for organization details page
 router.get('/organization/:id', showOrganizationDetailsPage);
+// Route for project  pages
+router.get('/projects', showProjectsPage);
+router.get('/project/:id', showProjectDetailsPage);
+// Route for catefories  pages
+router.get('/categories', showCategoriesPage);
+router.get('/category/:id', showCategoryDetailsPage);
+
 
 
 // error-handling routes
