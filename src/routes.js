@@ -1,8 +1,17 @@
 import express from 'express';
 
 import { showHomePage } from './controllers/index.js';
-import { showOrganizationsPage } from './controllers/organizations.js';
-import { showOrganizationDetailsPage } from './controllers/organizations.js';
+
+import {
+    showOrganizationsPage,
+    showOrganizationDetailsPage,
+    showNewOrganizationForm,
+    processNewOrganizationForm,
+    organizationValidation
+} from './controllers/organizations.js';
+
+
+
 import { showProjectsPage } from './controllers/projects.js';
 import { showProjectDetailsPage } from './controllers/projects.js';
 import { showCategoriesPage } from './controllers/categories.js';
@@ -15,6 +24,9 @@ router.get('/', showHomePage);
 // Route for organization  pages
 router.get('/organizations', showOrganizationsPage);
 router.get('/organization/:id', showOrganizationDetailsPage);
+router.get('/new-organization', showNewOrganizationForm);
+router.post('/new-organization', organizationValidation, processNewOrganizationForm);
+
 // Route for project  pages
 router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetailsPage);
