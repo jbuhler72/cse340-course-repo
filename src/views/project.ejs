@@ -45,10 +45,12 @@
       </ul>
     <% } %>
   </section>
-    
-    
-    
-   
+
+  <div class="page-actions">
+    <form method="POST" action="/delete-project/<%= project.project_id %>" onsubmit="return confirm('Delete this project? This cannot be undone.');">
+        <button type="submit" class="button button-danger">Delete Project</button>
+    </form>
+  </div>
 
 </main>
 

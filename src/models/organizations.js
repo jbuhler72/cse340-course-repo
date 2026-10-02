@@ -59,4 +59,55 @@ const createOrganization = async (name, description, contactEmail, logoFilename)
     return result.rows[0].organization_id;
 };
 
-export {getAllOrganizations,getOrganizationDetails,createOrganization}
+const updateOrganization = async (organizationId, name, description, contactEmail, logoFilename) => {
+  const query = `
+    UPDATE organization
+    SET name = $1, description = $2, contact_email = $3, logo_filename = $4
+    WHERE organization_id = $5
+    RETURNING organization_id;
+  `;
+
+  const queryParams = [name, description, contactEmail, logoFilename, organizationId];
+  const result = await db.query(query, queryParams);
+
+  if (result.rows.length === 0) {
+    throw new Error('Organization not found');
+  }
+
+  if (process.env.ENABLE_SQL_LOGGING === 'true') {
+    console.log('Updated organization with ID:', organizationId);
+  }
+
+  return result.rows[0].organization_id;
+};
+
+/**
+ * Deletes an organization from the database.
+ * @param {string|number} organizationId - The id of the organization to delete.
+ * @returns {string} The id of the deleted organization record.
+ * @throws Will throw if the organization still has projects assigned to it
+ *   (the projects.organization_id foreign key blocks the delete), or if no
+ *   organization with that id exists.
+ */
+const deleteOrganization = async (organizationId) => {
+  const query = `
+    DELETE FROM organization
+    WHERE organization_id = $1
+    RETURNING organization_id;
+  `;
+
+  const queryParams = [organizationId];
+  const result = await db.query(query, queryParams);
+
+  if (result.rows.length === 0) {
+    throw new Error('Organization not found');
+  }
+
+  if (process.env.ENABLE_SQL_LOGGING === 'true') {
+    console.log('Deleted organization with ID:', organizationId);
+  }
+
+  return result.rows[0].organization_id;
+};
+
+export {getAllOrganizations,getOrganizationDetails,createOrganization,updateOrganization,deleteOrganization}

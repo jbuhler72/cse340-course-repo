@@ -3,15 +3,26 @@
     <h1><%= title %></h1>
 
     <h2><%= organizationDetails.name %></h2>
-    <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
+    <center>
+    <p><img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
+     Description: <%= organizationDetails.description %></p>
+     
+    <div class="page-actions">
+    <a class="button" href="/edit-organization/<%= organizationDetails.organization_id %>">Edit Organization</a>
+    <form method="POST" action="/delete-organization/<%= organizationDetails.organization_id %>" onsubmit="return confirm('Delete this organization? This cannot be undone.');">
+        <button type="submit" class="button button-danger">Delete Organization</button>
+    </form>
+ </div>
 
-    <p>Description: <%= organizationDetails.description %></p>
-
+    <p></p>
     <h3>Service Projects</h3>
     <ul>
         <% projects.forEach(project => { %>
             <li><a href="/project/<%= project.project_id %>"><%= project.title %></a></li>
         <% }) %>
     </ul>
+ 
+
 </main>
+
 <%- include('partials/footer') %>
