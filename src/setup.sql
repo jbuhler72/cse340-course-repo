@@ -1,13 +1,12 @@
---Organization Table---
---*********************---------
-DROP TABLE IF EXISTS organization;
 CREATE TABLE organization (
-    organization_id SERIAL PRIMARY KEY,
-    name VARCHAR(150) NOT NULL,
-    description TEXT NOT NULL,
-    contact_email VARCHAR(255) NOT NULL,
-    logo_filename VARCHAR(255) NOT NULL
+	organization_id SERIAL PRIMARY KEY,
+	name VARCHAR(150) NOT NULL,
+	description TEXT NOT NULL,
+	contact_email VARCHAR(255) NOT NULL,
+	logo_filename VARCHAR(255) NOT NULL
 );
+
+-- Inserting sample data into the organization table
 
 INSERT INTO organization (name, description, contact_email, logo_filename)
 VALUES
@@ -15,88 +14,188 @@ VALUES
 ('GreenHarvest Growers', 'An urban farming collective promoting food sustainability and education in local neighborhoods.', 'contact@greenharvest.org', 'greenharvest-logo.png'),
 ('UnityServe Volunteers', 'A volunteer coordination group supporting local charities and service initiatives.', 'hello@unityserve.org', 'unityserve-logo.png');
 
---projects Table---
---*********************---------
-DROP TABLE IF EXISTS projects;
+-- Creating table for the projects
+
 CREATE TABLE projects (
     project_id SERIAL PRIMARY KEY,
-    organization_id INTEGER NOT NULL REFERENCES organization(organization_id),
+    organization_id INTEGER NOT NULL,
     title VARCHAR(150) NOT NULL,
-    description TEXT NOT NULL,
-    location VARCHAR(255) NOT NULL,
-    eventDate DATE NOT NULL
+    description TEXT,
+    location VARCHAR(150),
+    date DATE,
+    FOREIGN KEY (organization_id) REFERENCES organization(organization_id)
 );
+
+-- Inserting sample data into the projects table
 
 INSERT INTO projects
-    (organization_id, title, description, location, eventDate)
+(organization_id, title, description, location, date)
 VALUES
-    (1, 'Community Park Renovation', 'Help renovate a local community park by improving pathways, benches, and shared spaces.', 'Central Community Park', '2026-09-12'),
-    (1, 'Neighborhood Playground Build', 'Assist with preparing and improving a safe playground area for children and families.', 'Riverside Neighborhood', '2026-09-19'),
-    (1, 'Community Center Ramp Repair', 'Support repairs and improvements to a community center.', '3150 South 800 West', '2026-11-26'),
-    (1, 'Accessible Walkway Project', 'Help construct and improve accessible walkways around a community facility.', 'Westside Community', '2026-11-07'),
-    (1, 'Sustainable Garden Construction', 'Build garden spaces using sustainable materials and community-friendly construction methods.', 'Greenfield Community', '2026-12-10'),
 
-    (2, 'Sort Food For Food Bank', 'Pick food from community garden.', 'Happyville Community Garden', '2026-09-19'),
-    (2, 'Community Vegetable Harvest', 'Assist volunteers with harvesting and organizing fresh vegetables for the local community.', 'GreenHarvest Farm', '2026-09-20'),
-    (2, 'Composting Workshop', 'Help prepare a community workshop focused on composting and sustainable food practices.', 'Eastside Community Center', '2026-09-27'),
-    (2, 'School Garden Project', 'Assist students and volunteers with creating and maintaining a school garden.', 'Lincoln Elementary School', '2026-10-04'),
-    (2, 'Food Sustainability Fair', 'Support a community event promoting sustainable food production and healthy gardening practices.', 'City Community Hall', '2026-10-11'),
+-- BrightFuture Builders
+(1, 'Community Housing Project',
+ 'Building affordable and sustainable homes for low-income families.',
+ 'Kigali, Rwanda', '2026-10-15'),
 
-    (3, 'Food Donation Drive', 'Help collect, organize, and distribute donated food to the foodbank.', 'UnityServe Community Center', '2026-09-14'),
-    (3, 'Senior Center Volunteer Day', 'Assist with community activities and facility support at a local senior center.', 'Lakeside Senior Center', '2026-09-21'),
-    (3, 'Community Cleanup Day', 'Join volunteers in cleaning and improving shared public spaces in the community.', 'Southside Neighborhood', '2026-09-28'),
-    (3, 'School Supply Drive', 'Help collect and organize school supplies for students and families who need support.', 'UnityServe Volunteer Center', '2026-10-05'),
-    (3, 'Charity Outreach Event', 'Support volunteers coordinating an outreach event for local community organizations.', 'Central Civic Hall', '2026-10-12');
+(1, 'Green School Construction',
+ 'Building environmentally friendly classrooms using sustainable materials.',
+ 'Gasabo, Kigali', '2026-11-10'),
 
---category Table---
---*********************---------
-DROP TABLE IF EXISTS category;
-CREATE TABLE category (
+(1, 'Rural Bridge Project',
+ 'Constructing safe bridges to improve transportation for rural communities.',
+ 'Musanze, Rwanda', '2026-12-05'),
+
+(1, 'Clean Water Facilities',
+ 'Building water collection and storage facilities for local communities.',
+ 'Nyagatare, Rwanda', '2027-01-20'),
+
+(1, 'Community Road Improvement',
+ 'Improving roads connecting local neighborhoods and communities.',
+ 'Huye, Rwanda', '2027-02-12'),
+
+(1, 'Youth Construction Training',
+ 'Training young people in sustainable construction and building skills.',
+ 'Kigali, Rwanda', '2027-03-01'),
+
+
+-- GreenHarvest Growers
+(2, 'Urban Vegetable Gardens',
+ 'Creating community vegetable gardens in urban neighborhoods.',
+ 'Kigali, Rwanda', '2026-10-20'),
+
+(2, 'School Farming Program',
+ 'Teaching students how to grow vegetables and practice sustainable agriculture.',
+ 'Gasabo, Kigali', '2026-11-15'),
+
+(2, 'Community Composting Project',
+ 'Creating community composting centers to reduce organic waste.',
+ 'Kicukiro, Kigali', '2026-12-10'),
+
+(2, 'Rooftop Farming Initiative',
+ 'Developing rooftop farms to increase food production in urban areas.',
+ 'Nyarugenge, Kigali', '2027-01-05'),
+
+(2, 'Farmers Training Program',
+ 'Training local farmers in sustainable farming techniques.',
+ 'Rwamagana, Rwanda', '2027-02-15'),
+
+(2, 'Community Food Market',
+ 'Creating a local market where farmers can sell fresh produce.',
+ 'Kigali, Rwanda', '2027-03-01'),
+
+
+-- UnityServe Volunteers
+(3, 'Community Clean-Up',
+ 'Organizing volunteers to clean public spaces and improve neighborhoods.',
+ 'Kigali, Rwanda', '2026-10-10'),
+
+(3, 'Food Donation Drive',
+ 'Collecting and distributing food packages to families in need.',
+ 'Gasabo, Kigali', '2026-11-05'),
+
+(3, 'Elderly Support Program',
+ 'Providing assistance and companionship to elderly community members.',
+ 'Huye, Rwanda', '2026-12-15'),
+
+(3, 'School Supplies Campaign',
+ 'Collecting school materials for children from disadvantaged families.',
+ 'Musanze, Rwanda', '2027-01-20'),
+
+(3, 'Youth Mentorship Program',
+ 'Connecting young people with volunteers for mentorship and guidance.',
+ 'Kigali, Rwanda', '2027-02-10'),
+
+(3, 'Community Health Outreach',
+ 'Supporting community health education and outreach activities.',
+ 'Rubavu, Rwanda', '2027-03-15');
+
+
+ -- Creating a table categories
+
+CREATE TABLE categories (
     category_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE,
-    description  TEXT NOT NULL
+    category_name VARCHAR(100) NOT NULL
 );
 
-INSERT INTO category (name, description)
-VALUES
- ('Environmental',                                                    -- category_id 1
- 'Cleanups, conservation, and sustainability projects.'),
-('Educational',                                                       -- category_id 2
- 'Tutoring, literacy programs, and school support.'),
-('Community Service',                                                 -- category_id 3
- 'Neighborhood improvement and local outreach.'),
-('Health and Wellness',                                               -- category_id 4
- 'Health fairs, food drives, and wellness education.'),
-('Food Security',                                                     -- category_id 5
- 'Helping with food banks and Growing and distributing food to households that need it. '),
-('Housing and Infrastructure',                                        -- category_id 6
- 'Building, repairing, and improving the accessibility of shared spaces and homes.'),
-('Senior Support',                                                    -- category_id 7
- 'Services, companionship, and practical help for older adults.');
+-- Creating a linking table for the project and categories
 
---project_category Table---
---*********************---------
-DROP TABLE IF EXISTS project_category;
 CREATE TABLE project_category (
-    project_id INTEGER NOT NULL REFERENCES projects(project_id),
-    category_id INTEGER NOT NULL REFERENCES category(category_id),
-    PRIMARY KEY (project_id, category_id)
+    project_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+
+    PRIMARY KEY (project_id, category_id),
+
+    FOREIGN KEY (project_id)
+        REFERENCES projects(project_id),
+
+    FOREIGN KEY (category_id)
+        REFERENCES categories(category_id)
 );
+
+-- Inserting data in categories table
+
+INSERT INTO categories (category_name)
+VALUES
+('Environmental'),
+('Educational'),
+('Community Service'),
+('Health and Wellness');
+
+
+SELECT * FROM categories;
+
 
 INSERT INTO project_category (project_id, category_id)
 VALUES
-    (1, 4),
-    (2, 3),
-    (3, 3),
-    (4, 4),
-    (5, 1),
-    (6, 1),
-    (7, 1),
-    (8, 1),
-    (9, 2),
-    (10, 1),
-    (11, 2),
-    (12, 3),
-    (13, 1),
-    (14, 1),
-    (15, 3);
+-- BrightFuture Builders
+(1, 1), -- Community Housing Project → Environmental
+(1, 3), -- Community Housing Project → Community Service
+(2, 2), -- Green School Construction → Educational
+(2, 1), -- Green School Construction → Environmental
+(3, 3), -- Rural Bridge Project → Community Service
+(3, 1), -- Rural Bridge Project → Environmental
+(4, 1), -- Clean Water Facilities → Environmental
+(4, 3), -- Clean Water Facilities → Community Service
+(5, 1), -- Community Road Improvement → Environmental
+(5, 3), -- Community Road Improvement → Community Service
+(6, 2), -- Youth Construction Training → Educational
+(6, 3), -- Youth Construction Training → Community Service
+
+-- GreenHarvest Growers
+(7, 1), -- Urban Vegetable Gardens → Environmental
+(7, 3), -- Urban Vegetable Gardens → Community Service
+(8, 2), -- School Farming Program → Educational
+(8, 1), -- School Farming Program → Environmental
+(9, 1), -- Community Composting Project → Environmental
+(9, 3), -- Community Composting Project → Community Service
+(10, 1), -- Rooftop Farming Initiative → Environmental
+(10, 3), -- Rooftop Farming Initiative → Community Service
+(11, 2), -- Farmers Training Program → Educational
+(11, 1), -- Farmers Training Program → Environmental
+(12, 3), -- Community Food Market → Community Service
+(12, 1), -- Community Food Market → Environmental
+
+-- UnityServe Volunteers
+(13, 1), -- Community Clean-Up → Environmental
+(13, 3), -- Community Clean-Up → Community Service
+(14, 3), -- Food Donation Drive → Community Service
+(14, 4), -- Food Donation Drive → Health and Wellness
+(15, 3), -- Elderly Support Program → Community Service
+(15, 4), -- Elderly Support Program → Health and Wellness
+(16, 2), -- School Supplies Campaign → Educational
+(16, 3), -- School Supplies Campaign → Community Service
+(17, 2), -- Youth Mentorship Program → Educational
+(17, 3), -- Youth Mentorship Program → Community Service
+(18, 4), -- Community Health Outreach → Health and Wellness
+(18, 3); -- Community Health Outreach → Community Service
+
+
+SELECT
+    p.title  AS project_title,
+    c.category_name AS category
+FROM project_category pc
+JOIN projects p
+    ON pc.project_id = p.project_id
+JOIN categories c
+    ON pc.category_id = c.category_id
+ORDER BY p.project_id;

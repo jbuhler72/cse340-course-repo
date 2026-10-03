@@ -3,19 +3,18 @@
 <main>
     <h1><%= title %></h1>
     <span>
-            <p><a href="/new-catagory">Add a New Category</a></p>
+            <p><a href="/new-category">Add a New Category</a></p>
         </span>
     <section class="categories">
         <% categories.forEach(category => { %>
             <div class="category-card">
-                <div class="category-icon"><%= category.name.charAt(0) %></div>
+                <div class="category-icon"><%= category.category.charAt(0) %></div>
                 <h2><a
               class="category-tag"
               href="/category/<%= category.category_id %>"
             >
-              <%= category.name %>
+              <%= category.category %>
             </a></h2>
-                <p><%= category.description %></p>
             </div>
         <% }) %>
     </section>
