@@ -1,27 +1,56 @@
 <%- include('partials/header') %>
 <main>
-    <h1><%= title %></h1>
 
-    <h2><%= organizationDetails.name %></h2>
-    <center>
-    <p><img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
-     Description: <%= organizationDetails.description %></p>
-     
-    <div class="page-actions">
-    <a class="button" href="/edit-organization/<%= organizationDetails.organization_id %>">Edit Organization</a>
-    <form method="POST" action="/delete-organization/<%= organizationDetails.organization_id %>" onsubmit="return confirm('Delete this organization? This cannot be undone.');">
-        <button type="submit" class="button button-danger">Delete Organization</button>
-    </form>
- </div>
+  <section class="page-header">
+    <div>
+      <span class="eyebrow eyebrow-purple">ORGANIZATION</span>
+      <h1><%= organizationDetails.name %></h1>
 
-    <p></p>
-    <h3>Service Projects</h3>
-    <ul>
+      <% if (user && user.role_name === 'admin') { %>
+      <div class="page-actions">
+        <a class="button button-purple" href="/edit-organization/<%= organizationDetails.organization_id %>">Edit Organization</a>
+        <form method="POST" action="/delete-organization/<%= organizationDetails.organization_id %>" onsubmit="return confirm('Delete this organization? This cannot be undone.');">
+          <button type="submit" class="button button-danger">Delete Organization</button>
+        </form>
+      </div>
+      <% } %>
+    </div>
+  </section>
+
+  <div class="detail-card">
+    <div class="detail-grid">
+      <div class="detail-item detail-item-full">
+        <span class="detail-label">Logo</span>
+        <p class="detail-value">
+          <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
+        </p>
+      </div>
+
+      <div class="detail-item detail-item-full">
+        <span class="detail-label">Description</span>
+        <p class="detail-value"><%= organizationDetails.description %></p>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="page-header">
+      <div>
+        <span class="eyebrow">SERVICE PROJECTS</span>
+        <h2>Projects From This Organization</h2>
+      </div>
+    </div>
+
+    <% if (projects.length === 0) { %>
+      <p>This organization does not have any service projects yet.</p>
+    <% } else { %>
+      <ul>
         <% projects.forEach(project => { %>
-            <li><a href="/project/<%= project.project_id %>"><%= project.title %></a></li>
+          <li><a href="/project/<%= project.project_id %>"><%= project.title %></a></li>
         <% }) %>
-    </ul>
- 
+      </ul>
+    <% } %>
+  </section>
 
 </main>
 

@@ -6,34 +6,53 @@
       <span class="eyebrow">PROJECT</span>
       <h1><%= projectDetails.title %></h1>
 
+      <% if (user && user.role_name === 'admin') { %>
       <div class="page-actions">
         <a href="/edit-project/<%= projectDetails.project_id %>" class="button">Edit Project</a>
-        <a href="/assign-categories/<%= projectDetails.project_id %>" class="button">Edit Categories</a>
+        <a href="/assign-categories/<%= projectDetails.project_id %>" class="button button-teal">Edit Categories</a>
       </div>
+      <% } %>
     </div>
   </section>
 
-  <p><strong>Description:</strong> <%= projectDetails.description %></p>
-  <p>
-    <strong>Date:</strong>
-    <%= new Date(projectDetails.eventdate).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }) %>
-  </p>
-  <p><strong>Location:</strong> <%= projectDetails.location %></p>
-  <p>
-    <strong>Organization:</strong>
-    <a href="/organization/<%= projectDetails.organization_id %>">
-      <%= projectDetails.organization_name %>
-    </a>
-  </p>
+  <div class="detail-card">
+    <div class="detail-grid">
+      <div class="detail-item detail-item-full">
+        <span class="detail-label">Description</span>
+        <p class="detail-value"><%= projectDetails.description %></p>
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-label">Date</span>
+        <p class="detail-value">
+          <%= new Date(projectDetails.eventdate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }) %>
+        </p>
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-label">Location</span>
+        <p class="detail-value"><%= projectDetails.location %></p>
+      </div>
+
+      <div class="detail-item detail-item-full">
+        <span class="detail-label">Organization</span>
+        <p class="detail-value">
+          <a href="/organization/<%= projectDetails.organization_id %>">
+            <%= projectDetails.organization_name %>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
 
   <section class="section">
     <div class="page-header">
       <div>
-        <span class="eyebrow">CATEGORIES</span>
+        <span class="eyebrow eyebrow-teal">CATEGORIES</span>
         <h2>Categories For This Project</h2>
       </div>
     </div>

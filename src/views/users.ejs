@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+<main>
+
+  <section class="page-header">
+    <div>
+      <span class="eyebrow eyebrow-amber">ADMIN</span>
+      <h1><%= title %></h1>
+    </div>
+  </section>
+
+  <ul class="user-list">
+    <% users.forEach(user=> { %>
+      <li>
+        <div>
+          <strong><%= user.name %></strong>
+          <p><%= user.email %></p>
+        </div>
+        <span class="role-badge role-<%= user.role_name %>"><%= user.role_name %></span>
+      </li>
+      <% }); %>
+  </ul>
+
+</main>
+
+<%- include('partials/footer') %>

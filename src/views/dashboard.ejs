@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+    <main>
+
+      <section class="page-header">
+        <div>
+          <span class="eyebrow">DASHBOARD</span>
+          <h1><%= title %></h1>
+        </div>
+      </section>
+
+      <div class="detail-card">
+        <div class="detail-grid">
+          <div class="detail-item">
+            <span class="detail-label">Name</span>
+            <p class="detail-value"><%= name %></p>
+          </div>
+
+          <div class="detail-item">
+            <span class="detail-label">Email</span>
+            <p class="detail-value"><%= email %></p>
+          </div>
+        </div>
+      </div>
+
+      <% if (user && user.role_name === 'admin') { %>
+      <div class="page-actions">
+        <a href="/users" class="button button-amber">View All Users</a>
+      </div>
+      <% } %>
+
+    </main>
+
+    <%- include('partials/footer') %>
